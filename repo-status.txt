@@ -1,0 +1,28 @@
+project bootable/recovery/                      (*** NO BRANCH ***)
+ -m	partition.cpp
+ --	partition.cpp.bak_v13
+ --	partition.cpp.bak_v14
+ --	partition.cpp.bak_v14_fix
+ -m	partitionmanager.cpp
+ --	partitionmanager.cpp.bak_v5
+ --	partitionmanager.cpp.bak_v7
+project build/make/                             (*** NO BRANCH ***)
+ -m	target/product/default_art_config.mk
+project build/soong/                            (*** NO BRANCH ***)
+ -m	ui/build/config.go
+ --	ui/build/config.go.orig
+ -m	ui/build/config_test.go
+ --	ui/build/config_test.go.orig
+ -m	ui/build/ninja.go
+ --	ui/build/ninja.go.orig
+ -m	ui/build/rbe.go
+project hardware/interfaces/                    (*** NO BRANCH ***)
+ -m	health/aidl/default/Android.bp
+ --	health/aidl/default/Android.bp.bak
+project system/sepolicy/                        (*** NO BRANCH ***)
+ --	private/attributes.bak
+ --	public/attributes.bak
+project system/vold/                            (*** NO BRANCH ***)
+ -m	MetadataCrypt.cpp
+ --	MetadataCrypt.cpp.bak_v10
+ --	MetadataCrypt.cpp.bak_v9
