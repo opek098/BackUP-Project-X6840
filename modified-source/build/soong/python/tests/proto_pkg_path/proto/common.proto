@@ -1,5 +1,0 @@
-syntax = "proto3";
-
-message MyCommonMessage {
-  string common = 1;
-}

@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-import "mylib/subpackage/proto/common.proto";
-
-message MyMessage {
-  string name = 1;
-  MyCommonMessage common = 2;
-}

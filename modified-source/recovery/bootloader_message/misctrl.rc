@@ -1,4 +1,0 @@
-service misctrl /system/bin/misctrl
-    user root # for misc partition access
-    class core
-    oneshot
