@@ -1,4 +1,36 @@
 #!/bin/bash
+device_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+workspace_root="$(cd "${device_dir}/../../.." && pwd)"
+vibration_patch_file="${device_dir}/patches/01-patch-vibration.patch"
+health_patch_file="${device_dir}/patches/02-patch-health-hal.patch"
+
+if [[ ! -f "${health_patch_file}" ]]; then
+    echo "[X6840] Missing patch: ${health_patch_file}"
+elif [[ ! -f "${vibration_patch_file}" ]]; then
+    echo "[X6840] Missing patch: ${vibration_patch_file}"
+elif ! command -v patch >/dev/null 2>&1; then
+    echo "[X6840] Missing required command: patch"
+elif (
+    cd "${workspace_root}" &&
+	patch -p1 -N --dry-run --silent < "${vibration_patch_file}" >/dev/null 2>&1
+    patch -p1 -N --dry-run --silent < "${health_patch_file}" >/dev/null 2>&1
+); then
+    if (
+        cd "${workspace_root}" &&
+		patch -p1 -N --silent < "${vibration_patch_file}" >/dev/null 2>&1
+        patch -p1 -N --silent < "${health_patch_file}" >/dev/null 2>&1
+    ); then
+        echo "[X6840] Applied patches."
+    else
+        echo "[X6840] Failed to apply patches."
+    fi
+else
+    echo "[X6840] Patches already applied or not applicable"
+fi
+
+unset device_dir workspace_root patch_file
+
+# additional properties
 	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v28.1.zip
 	export FOX_VIRTUAL_AB_DEVICE=1
 	export FOX_VANILLA_BUILD=1
@@ -60,4 +92,4 @@
 	export OF_FLASHLIGHT_ENABLE=0
 
   # common lunch
-add_lunch_combo twrp_X6840-bp2a-eng
+add_lunch_combo twrp_X6840-eng
