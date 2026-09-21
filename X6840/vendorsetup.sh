@@ -90,6 +90,3 @@ unset device_dir workspace_root patch_file
 
 	# no flashlight
 	export OF_FLASHLIGHT_ENABLE=0
-
-  # common lunch
-add_lunch_combo twrp_X6840-eng
